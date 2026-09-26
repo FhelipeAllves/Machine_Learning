@@ -1,0 +1,110 @@
+% ----
+% Configurações do documento 
+% ----
+
+% ----
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={Geração Distribuída}{Qualidade da Energia Elétrica}{Métodos de Otimização}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=black,          	% color of internal links
+    	citecolor=black,        		% color of links to bibliography
+    	filecolor=black,      	% color of file links
+		urlcolor=black,
+		bookmarksdepth=4
+}
+\makeatother
+% ----
+
+% ----
+% Espaçamentos entre linhas e parágrafos 
+% ----
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Altera espaçamento entre o parágrafo e o texto
+\setlength\afterchapskip{0.7cm}
+
+% Numeração de figuras e tabelas (ABNT recomenda numeração continua)
+%\counterwithin{figure}{chapter}
+%\counterwithin{table}{chapter}
+
+% ----
+% Reestrutura a fonte do capítulo e da seção
+% ----
+%\renewcommand{\ABNTEXchapterfont}{\sffamily\scshape}
+%\renewcommand{\ABNTEXsectionfont}{\sffamily}
+\renewcommand{\ABNTEXchapterfont}{\fontseries{bx}}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{\fontseries{m}}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfont}{\fontseries{b}}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsubsectionfont}{\fontseries{m}}
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
+
+% ---
+% Compila o indice
+% ---
+\makeindex
+% ---
+
+% Ajusta o título "Referências" para maiúsculo no sumario (abntex2 - item 4.8.2 - pag 16)
+\addto\captionsbrazil{
+% ajusta nomes padrões do babel
+\renewcommand{\bibname}{REFER\^ENCIAS}
+}
+
+%\chapterstyle{default}
+%\chapterstyle{ger}
+
+% %edita o estilo do capítulo
+% %http://zoonek.free.fr/LaTeX/LaTeX_samples_chapter/0.html
+% \makeatletter
+% \def\@makechapterhead#1{%
+%  %\vspace*{0\p@}%
+%  {\parindent \z@ \raggedright \normalfont
+%     \ifnum \c@secnumdepth >\m@ne
+%      \if@mainmatter
+%         \Large\bfseries \@chapapp\space \thechapter
+%         \par\nobreak
+%         \vskip 0\p@
+%      \fi
+%     \fi
+%     \interlinepenalty\@M
+%     \LARGE \bfseries #1\par\nobreak
+%     \vskip 30\p@
+%  }}
+% \def\@schapter#1{\if@twocolumn
+%                   \@topnewpage[\@makeschapterhead{#1}]%
+%                 \else
+%                   \@makeschapterhead{#1}%
+%                   \@afterheading
+%                 \fi}
+% \def\@makeschapterhead#1{%
+%  %\vspace*{0\p@}%
+%  {\parindent \z@ \centering
+%     \normalfont
+%     \interlinepenalty\@M
+%     \normalsize \bfseries  #1\par\nobreak
+%     \vskip 20\p@
+%  }}
+
+% (Opcional) Remove os warnings relacionados com o output.bbl hyperref \uppercase
+% Esse erro aparece quando o sumário está em "abnt-6027-2012"
+%\pdfstringdefDisableCommands{\let\uppercase\relax}

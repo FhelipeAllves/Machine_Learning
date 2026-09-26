@@ -1,0 +1,281 @@
+\section{ Linear regression with one variable }
+
+\subsection{ Plotting the Data}
+
+\begin{itemize}
+    \item How many features are involved in this problem?
+    \item How much data is involved in this problem?
+    \item What is the problem from a machine learning point-of-view?
+    \subitem Supervised/Unsupervised?
+    \subitem Regression/Classification?
+    \subitem Linear/?on-linear problem
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/base_datas.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\section{Gradient Descent}
+\subsection{Computing the cost J($\theta$)}
+
+\begin{lstlisting}
+import numpy as np
+
+def computeCost(X, y, theta):  
+    """
+       computes the cost of using theta as the parameter for linear 
+       regression to fit the data points in X and y
+    """
+    m = y.size
+    J = 0.
+
+    # =============YOUR CODE HERE ===============
+    # Instructions: Compute the cost of a particular choice of theta
+
+
+    #h = float(theta[0,0]) + float(theta[1,0])*X[:,1]
+    #h = h.reshape((m,1))
+    h = X @ theta
+    J = (1/(2*m)) * np.sum((h-y)**2)
+    
+	#   ===========================================
+
+    return J
+\end{lstlisting}
+
+\subsection{Gradient descent}
+
+\begin{lstlisting}
+import numpy as np
+from computeCost import computeCost
+
+def gradientDescent(X, y, theta, alpha, num_iters):  
+    """
+     Performs gradient descent to learn theta
+       theta, cost_history, theta_history = gradientDescent(X, y, theta, alpha, num_iters) updates theta by
+       taking num_iters gradient steps with learning rate alpha
+    """
+    # Initialize some useful values
+    m = y.size  # number of training examples
+    n = theta.size # number of parameters
+    cost_history = np.zeros(num_iters) # cost over iters
+    theta_history = np.zeros((n,num_iters)) # theta over iters
+
+    for i in range(num_iters):
+    #   ====================== YOUR CODE HERE ======================
+    # Instructions: Perform a single gradient step on the parameter vector
+    #               theta.
+    #
+    # Hint: While debugging, it can be useful to print out the values
+    #       of the cost function (computeCost) and gradient here.
+
+        h = X @ theta
+
+        theta[0,0] = theta[0,0] - (alpha/m)*np.sum( ((h-y)*X[:,0].reshape((m,1)))  )  
+        theta[1,0] = theta[1,0] - (alpha/m)*np.sum(((h-y)*X[:,1].reshape((m,1))))
+
+        cost_history[i] = computeCost(X, y, theta)
+        theta_history[:,i] = theta.reshape((2,))
+    
+    #   ============================================================
+
+    return theta, cost_history, theta_history
+\end{lstlisting}
+
+As you program, make sure you understand what you are trying to optimize and what is being
+updated.
+
+Training data with linear regression fit :
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/linear_regr.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsection{Visualizing J($\theta$)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/cost_f.png}
+    \label{fig:placeholder}
+\end{figure}
+
+, but you should understand how
+5
+the code you have written already is creating these images. In the next step of ex1.py
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/cost_2.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\section{Linear regression with multiple variables}
+\subsection{Feature Normalization}
+
+\begin{lstlisting}
+import numpy as np
+
+
+def featureNormalize(X):
+    """
+       returns a normalized version of X where
+       the mean value of each feature is 0 and the standard deviation
+       is 1. This is often a good preprocessing step to do when
+       working with learning algorithms.
+    """
+    X_norm, mu, sigma = 0,0,0
+    # ====================== YOUR CODE HERE ======================
+    # Instructions: First, for each feature dimension, compute the mean
+    #               of the feature and subtract it from the dataset,
+    #               storing the mean value in mu. Next, compute the
+    #               standard deviation of each feature and divide
+    #               each feature by it's standard deviation, storing
+    #               the standard deviation in sigma.
+    #
+    #               Note that X is a matrix where each column is a
+    #               feature and each row is an example. You need
+    #               to perform the normalization separately for
+    #               each feature.
+    #
+    # Hint: You might find the 'mean' and 'std' functions useful.
+    #
+
+
+    mu = np.mean(X, axis=0)
+    sigma = np.std(X, axis=0)
+    X_norm = (X - mu) / sigma
+
+
+
+	# =========================================
+
+    return X_norm, mu, sigma
+\end{lstlisting}
+
+\subsection{Learning with gradient descent}
+\subsubsection{ Compute cost and gradients}
+
+
+\begin{lstlisting}
+import numpy as np
+from computeCostMulti import computeCostMulti
+
+def gradientDescentMulti(X, y, theta, alpha, num_iters):  
+    """
+     Performs gradient descent to learn theta
+       theta = gradientDescent(x, y, theta, alpha, num_iters) updates theta by
+       taking num_iters gradient steps with learning rate alpha
+    """
+    # Initialize some useful values
+    m = y.size  # number of training examples
+    n = theta.size # number of parameters
+    cost_history = np.zeros(num_iters)
+    theta_history = np.zeros((n,num_iters))
+
+    for i in range(num_iters):
+    #   ====================== YOUR CODE HERE ======================
+    # Instructions: Perform a single gradient step on the parameter vector
+    #               theta.
+    #
+    # Hint: While debugging, it can be useful to print out the values
+    #       of the cost function (computeCost) and gradient here.
+    #
+
+        h = X @ theta
+        grad = (1/m) * (X.T @ (h - y))
+        theta = theta - alpha * grad
+
+        cost_history[i] = computeCostMulti(X, y, theta)
+        theta_history[:,i] = theta.reshape((n,))
+      
+    #   =================================================
+        
+    return theta, cost_history, theta_history
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/j_mult_1.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsubsection{Selecting learning rates}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/j_alpha.png}
+    \label{fig:placeholder}
+\end{figure}
+
+pouquoi ????
+
+\subsubsection{Predict the price for a new house}
+
+\begin{lstlisting}
+import numpy as np
+
+# Estimate the price of a 1650 sq-ft, 3 br house
+def predict_multi(house_features, mu, sigma, theta):
+
+    #   ====================== YOUR CODE HERE ======================
+    # You should use the learned model with its characteristics (mu, sigma, theta)
+    # to predict the price of a house based on its features (surface and bedrooms)
+
+    house_features_norm = (house_features-mu)/sigma
+    house_features_norm = np.concatenate((np.ones((1, 1)), house_features_norm), axis=1)
+    price = house_features_norm.dot(theta)
+    print(f'shapes {np.shape(theta)}  {np.shape(house_features_norm)}')
+    return price
+\end{lstlisting}
+
+Predicted price of a 1650 sq-ft, 3 br house
+(using gradient descent): 293081.46
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/plan.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsection{ Optional exercise: Normal Equations}
+
+\begin{lstlisting}
+import numpy as np
+
+
+def normalEqn(X,y):
+   """ Computes the closed-form solution to linear regression
+      normalEqn(X,y) computes the closed-form solution to linear
+      regression using the normal equations.
+   """
+
+
+   # ====================== YOUR CODE HERE ======================
+   # Instructions: Complete the code to compute the closed form solution
+   #               to linear regression and put the result in theta.
+   #
+
+   t = np.linalg.pinv(X.T @ X) @ X.T @ y
+
+
+   # ===================================================
+
+   return t
+
+\end{lstlisting}
+
+Solving with normal equations...
+
+Theta computed from the normal equations:
+ [[89597.90954355]
+ [  139.21067402]
+ [-8738.01911255]] 
+
+Predicted price of a 1650 sq-ft, 3 br house 
+(using normal equations):
+293081.464335
