@@ -1,0 +1,32 @@
+% A estrutura correta é: table -> centering -> resizebox -> tabular
+
+\begin{table}[h!] % A moldura flutuante vem primeiro. O [h!] é uma sugestão de posicionamento.
+\centering       % Comando para centralizar o conteúdo DENTRO da moldura.
+
+\makebox[\textwidth][c]{ % Centraliza as figuras fora da largura do texto
+\resizebox{1.2\linewidth}{!}{% O resizebox envolve APENAS o conteúdo que será redimensionado.
+  
+  \begin{tabular}{|cllcll|} % A tabela real (o conteúdo) fica aqui dentro.
+  \hline
+  \multicolumn{6}{|l|}{} \\ \hline
+  \multicolumn{6}{|c|}{\begin{tabular}[c]{@{}c@{}}
+  \\[1.5pt]
+  {\Large\textbf{U.E 5.1 - Intelligence Artificielle : Machine learning}} \\[3pt] 
+  {\Large\textbf{Promotion FISE 2027}}\\[3pt]
+
+  
+  \end{tabular}} \\ \hline
+  \multicolumn{3}{|c|}{\multirow{5}{*}{\begin{tabular}[c]{@{}c@{}}\small ENSTA BRETAGNE\\ \small 2 Rue François Verny\\ \small 29200 Brest Cedex 9, France\\ \includegraphics[width=0.3\linewidth]{figure/Ensta-logotype-05-bleu-rvb.png} \end{tabular}}} & \multicolumn{3}{c|}{} \\
+  \multicolumn{3}{|c|}{} & \multicolumn{3}{c|}{} \\
+  \multicolumn{3}{|c|}{} & \multicolumn{3}{c|}{\multirow{5}{*}{\begin{tabular}[c]{@{}c@{}}\small BARROS ALVES Luiz Felipe\\ \small luiz.barros@ensta.fr\\  \\ \end{tabular}}} \\
+  \multicolumn{3}{|c|}{} & \multicolumn{3}{c|}{} \\
+  \multicolumn{3}{|c|}{} & \multicolumn{3}{c|}{} \\
+  \multicolumn{3}{|c|}{} & \multicolumn{3}{c|}{} \\
+  \multicolumn{3}{|c|}{} & \multicolumn{3}{c|}{} \\
+  \multicolumn{3}{|c|}{} & \multicolumn{3}{c|}{} \\
+  \multicolumn{3}{|c|}{} & \multicolumn{3}{c|}{} \\ \hline
+  \end{tabular}
+
+}}
+
+\end{table}

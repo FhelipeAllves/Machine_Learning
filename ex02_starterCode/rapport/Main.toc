@@ -1,0 +1,8 @@
+\babel@toc {brazilian}{}\relax 
+\contentsline {section}{\numberline {1} Logistic Regression}{2}{}%
+\contentsline {subsection}{\numberline {1.1} Visualizing the data}{2}{}%
+\contentsline {subsection}{\numberline {1.2}Implementation}{3}{}%
+\contentsline {subsubsection}{\numberline {1.2.1}Sigmoid function}{3}{}%
+\contentsline {subsubsection}{\numberline {1.2.2}Cost function and gradient}{4}{}%
+\contentsline {subsubsection}{\numberline {1.2.3}Learning parameters using fmin tnc}{5}{}%
+\contentsline {subsubsection}{\numberline {1.2.4} Evaluating logistic regression }{6}{}%

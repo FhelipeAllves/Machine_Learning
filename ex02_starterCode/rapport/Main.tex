@@ -1,0 +1,104 @@
+\documentclass [12pt, a4paper]{article}
+
+% Acentos
+\usepackage[utf8]{inputenc}
+
+\usepackage[brazilian]{babel}
+\usepackage{wrapfig}
+
+% Pacote de gráficos mais recente
+\usepackage[pdftex]{color,graphicx}
+\usepackage{mathrsfs}
+\usepackage[labelformat = empty]{subcaption}
+\usepackage[justification=centering]{caption}
+\usepackage[]{multirow}
+\usepackage[]{graphics}
+\usepackage{graphicx}
+\usepackage{sidecap}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{minitoc}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{siunitx}
+\usepackage{varwidth}
+\usepackage{array,graphicx,xcolor,colortbl}
+\usepackage{blindtext}
+\usepackage{upquote}
+\usepackage{rotating}
+\usepackage{tabu} 
+\usepackage{amsmath}
+\usepackage{tasks}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{appendix}
+\usepackage{indentfirst}
+\usepackage{tabu} 
+\usepackage{tikz}
+\usepackage{comment}
+\usepackage{setspace}
+\usepackage{footmisc}
+\usepackage[alf,bibjustif,abnt-etal-text=it,abnt-repeated-title-omit=no,abnt-emphasize=bf]{abntex2cite}
+\usepackage[american]{circuitikz}
+\usepackage{tabularx}
+\usepackage{listings}
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red!70!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    tabsize=4
+}
+
+% Margens
+\usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+% Fonte
+\usepackage[T1]{fontenc}
+% Cor
+\definecolor{meu}{RGB}{0,102,161}
+
+% \usepackage{fancyhdr}
+% \setlength{\headheight}{14.5pt}
+% \fancyfoot{}
+% \fancyhead{}
+% \renewcommand{\headrulewidth}{0pt}
+
+\usepackage{fancyhdr} 
+\pagestyle{fancy}     
+
+\fancyhf{}             
+\lhead{U.E 5.1 - Intelligence Artificielle : Machine learning \hfill \thepage}
+
+\begin{document}
+
+%Capa de apresentação
+\input{Capa}
+
+% Sumário
+\renewcommand{\contentsname}{\Centering Sommaire}
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage
+
+%Introdução
+\input{activite}
+
+% \input{conclusion}
+
+%\section{REFERÊNCIAS BIBLIOGRÁFICAS}
+% \addcontentsline{toc}{section}{REFERÊNCIAS}
+% \bibliography{ref}
+
+
+\end{document}
