@@ -6,3 +6,10 @@
 \contentsline {subsubsection}{\numberline {1.2.2}Cost function and gradient}{4}{}%
 \contentsline {subsubsection}{\numberline {1.2.3}Learning parameters using fmin tnc}{5}{}%
 \contentsline {subsubsection}{\numberline {1.2.4} Evaluating logistic regression }{6}{}%
+\contentsline {section}{\numberline {2}Regularized logistic regression}{7}{}%
+\contentsline {subsection}{\numberline {2.1}Visualizing the data}{7}{}%
+\contentsline {subsection}{\numberline {2.2}Feature mapping}{7}{}%
+\contentsline {subsection}{\numberline {2.3}Cost function and gradient}{7}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}Learning parameters using fmin tnc}{9}{}%
+\contentsline {subsection}{\numberline {2.4}Plotting the decision boundary}{9}{}%
+\contentsline {subsection}{\numberline {2.5}Impact of $\alpha $}{9}{}%

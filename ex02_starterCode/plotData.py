@@ -18,5 +18,5 @@ def plotData(X,y):
 	plt.ylabel('Exam 2 score')
 	plt.grid(True)
 	plt.legend(['Not admitted (y=0)','Admitted (y=1)'], loc='upper right', shadow=True,fontsize='x-large', numpoints=1)
-
+	# plt.show()
 	# =============================================================

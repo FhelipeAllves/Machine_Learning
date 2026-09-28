@@ -23,8 +23,9 @@ def costFunctionReg(theta, X, y, Lambda):
 
     # =============================================================
     
-
-
+    arg1 = (X@theta)
+    arg2 = sigmoid(arg1)
+    J = (-1/m) * (y.T @ np.log(arg2) + (1-y).T @ np.log(1-arg2)) + (Lambda/(2*m))*np.sum(theta[1:]**2)  
     
     # =============================================================
     

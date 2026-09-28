@@ -22,7 +22,9 @@ def gradientFunctionReg(theta, X, y, Lambda):
     #               derivatives of the cost w.r.t. each parameter in theta
     # =============================================================
 
-
+    arg1 = (X@theta)
+    arg2 = sigmoid(arg1)
+    grad = (1/m) * (X.T @ (arg2 - y)) + (Lambda/m) * np.vstack([[0], theta[1:]])  
 
 
     # =============================================================
