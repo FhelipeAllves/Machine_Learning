@@ -107,7 +107,7 @@ pred = predictOneVsAll(all_theta, X)
 
 
 # Evaluation
-accuracy = np.mean(np.double(pred == yZ)) * 100
+accuracy = np.mean(np.double(pred == y)) * 100
 print('\n -------------------------- \n')
 print('Training Set Accuracy: %f\n' % accuracy)
 print('Expected approx accuracy: 96.46%')

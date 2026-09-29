@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.21)  28 SEP 2026 22:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.21)  29 SEP 2026 12:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -822,7 +822,26 @@ Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@O@erf=\skip86
 \f@nch@O@olf=\skip87
 \f@nch@O@orf=\skip88
-) (./Main.aux)
+) (./Main.aux
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+)
 \openout1 = `Main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
@@ -954,11 +973,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--89
  []\T1/cmr/bx/n/17.28 Sommaire 
  []
 
-No file Main.toc.
+(./Main.toc)
 \tf@toc=\write6
 \openout6 = `Main.toc'.
 
-[1
+ [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./figure/Ensta-logotype-05-bleu-rvb.png>] (./activite.tex
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5.
@@ -969,7 +988,7 @@ LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 1
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-<figure/datas.png, id=13, 462.528pt x 346.896pt>
+<figure/datas.png, id=16, 462.528pt x 346.896pt>
 File: figure/datas.png Graphic file (type png)
 <use figure/datas.png>
 Package pdftex.def Info: figure/datas.png  used on input line 33.
@@ -999,7 +1018,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [4]
-<figure/boundary.png, id=31, 462.528pt x 346.896pt>
+<figure/boundary.png, id=32, 462.528pt x 346.896pt>
 File: figure/boundary.png Graphic file (type png)
 <use figure/boundary.png>
 Package pdftex.def Info: figure/boundary.png  used on input line 146.
@@ -1013,12 +1032,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5 <./figure/boundary.png>]
-<figure/image.png, id=36, 764.8575pt x 309.155pt>
+<figure/image.png, id=37, 764.8575pt x 309.155pt>
 File: figure/image.png Graphic file (type png)
 <use figure/image.png>
 Package pdftex.def Info: figure/image.png  used on input line 189.
 (pdftex.def)             Requested size: 320.0935pt x 129.38191pt.
-<figure/datas_reg.png, id=37, 462.528pt x 346.896pt>
+<figure/datas_reg.png, id=38, 462.528pt x 346.896pt>
 File: figure/datas_reg.png Graphic file (type png)
 <use figure/datas_reg.png>
 Package pdftex.def Info: figure/datas_reg.png  used on input line 206.
@@ -1048,69 +1067,75 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [8]
-
-./activite.tex:290: LaTeX Error: Environment image undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.290 \begin{image}
-                   [H]
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-<figure/image copy.png, id=50, 1499.6025pt x 146.5475pt>
-File: figure/image copy.png Graphic file (type png)
-<use figure/image copy.png>
-Package pdftex.def Info: figure/image copy.png  used on input line 293.
+<figure/imagecopy.png, id=51, 1499.6025pt x 146.5475pt>
+File: figure/imagecopy.png Graphic file (type png)
+<use figure/imagecopy.png>
+Package pdftex.def Info: figure/imagecopy.png  used on input line 292.
 (pdftex.def)             Requested size: 320.0935pt x 31.279pt.
-
-./activite.tex:295: LaTeX Error: \begin{document} ended by \end{image}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.295 \end{image}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./activite.tex:299: LaTeX Error: Environment image undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.299 \begin{image}
-                   [H]
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-<figure/boundary-2.png, id=51, 497.2176pt x 360.6273pt>
+<figure/boundary-2.png, id=52, 497.2176pt x 360.6273pt>
 File: figure/boundary-2.png Graphic file (type png)
 <use figure/boundary-2.png>
-Package pdftex.def Info: figure/boundary-2.png  used on input line 302.
+Package pdftex.def Info: figure/boundary-2.png  used on input line 301.
 (pdftex.def)             Requested size: 320.0935pt x 232.17085pt.
+<figure/boundary_0.png, id=53, 395.5578pt x 326.9013pt>
+File: figure/boundary_0.png Graphic file (type png)
+<use figure/boundary_0.png>
+Package pdftex.def Info: figure/boundary_0.png  used on input line 310.
+(pdftex.def)             Requested size: 192.0548pt x 158.72151pt.
+<figure/boundary_2.png, id=54, 395.5578pt x 326.9013pt>
+File: figure/boundary_2.png Graphic file (type png)
+<use figure/boundary_2.png>
+Package pdftex.def Info: figure/boundary_2.png  used on input line 312.
+(pdftex.def)             Requested size: 192.0548pt x 158.72151pt.
+<figure/boundary_10.png, id=55, 395.5578pt x 326.9013pt>
+File: figure/boundary_10.png Graphic file (type png)
+<use figure/boundary_10.png>
+Package pdftex.def Info: figure/boundary_10.png  used on input line 317.
+(pdftex.def)             Requested size: 192.0548pt x 158.72151pt.
+<figure/boundary_100.png, id=56, 395.5578pt x 326.9013pt>
+File: figure/boundary_100.png Graphic file (type png)
+<use figure/boundary_100.png>
+Package pdftex.def Info: figure/boundary_100.png  used on input line 319.
+(pdftex.def)             Requested size: 192.0548pt x 158.72151pt.
 
-./activite.tex:304: LaTeX Error: \begin{document} ended by \end{image}.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.304 \end{image}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-)
+[9 <./figure/imagecopy.png> <./figure/boundary-2.png>]
+<figure/multiclass.png, id=62, 462.528pt x 346.896pt>
+File: figure/multiclass.png Graphic file (type png)
+<use figure/multiclass.png>
+Package pdftex.def Info: figure/multiclass.png  used on input line 337.
+(pdftex.def)             Requested size: 320.0935pt x 240.08365pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10 <./figure/boundary_0.png> <./figure/boundary_2.png> <./figure/boundary_10.png> <./figure/boundary_100.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[11 <./figure/multiclass.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[12])
 Package minitoc Info: I0009
 (minitoc)             Listing minitoc auxiliary files. 
 (minitoc)             Creating the Main.maf file.
@@ -1134,29 +1159,29 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[9 <./figure/image copy.png> <./figure/boundary-2.png>] (./Main.aux)
+[13] (./Main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 45000 strings out of 474222
- 1087706 string characters out of 5748733
+ 45062 strings out of 474222
+ 1089107 string characters out of 5748733
  2213975 words of memory out of 5000000
- 66710 multiletter control sequences out of 15000+600000
+ 66770 multiletter control sequences out of 15000+600000
  570921 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,24n,87p,505b,1780s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,24n,87p,570b,1821s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on Main.pdf (9 pages, 549212 bytes).
+Output written on Main.pdf (13 pages, 1454754 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 54 compressed objects within 1 object stream
+ 120 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 
