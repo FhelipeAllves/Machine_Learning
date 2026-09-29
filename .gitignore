@@ -21,3 +21,5 @@
 *.ind
 *.acn                                                                                           
 *.mtc0
+__pycache__/
+venv/
