@@ -98,7 +98,6 @@ print('Cost at parameters (loaded from ex3weights): %f \n(this value should be a
 
 
 
-
 #%% =============== Part : Implement Regularization ===============
 #  Once your cost function implementation is correct, you should now
 #  continue to implement the regularization with the cost.
@@ -204,12 +203,12 @@ print('Training Neural Network... ')
 #  value to see how more training helps.
 
 #  You should also try different values of lambda
-Lambda = 1
+Lambda = 100
 
 costFunc = lambda p: nnCostFunction(p, input_layer_size, hidden_layer_size, num_labels, X, y, Lambda)[0]
 gradFunc = lambda p: nnCostFunction(p, input_layer_size, hidden_layer_size, num_labels, X, y, Lambda)[1]
 
-result = fmin_cg(costFunc, fprime=gradFunc, x0=initial_nn_params, maxiter=50, disp=True,full_output=True)
+result = fmin_cg(costFunc, fprime=gradFunc, x0=initial_nn_params, maxiter=400, disp=True,full_output=True)
 nn_params = result[0]
 cost = result[1]
 

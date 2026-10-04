@@ -1,0 +1,429 @@
+\section{| 3 Visualizing the data}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image1.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image2.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\section{| 4 Prediction by a neural network}
+
+\subsection{| 4.1 Model representation}
+\subsection{| 4.2 Feedforward Propagation and Prediction}
+
+\begin{lstlisting}
+import numpy as np
+
+from sigmoid import sigmoid
+
+def predictNeuralNetwork(Theta1, Theta2, X):
+    """ outputs the predicted label of X given the
+    trained weights of a neural network (Theta1, Theta2)
+    """
+
+    # Useful values
+    m, _ = X.shape
+    num_labels, _ = Theta2.shape
+
+    # ====================== YOUR CODE HERE ======================
+    # Instructions: Complete the following code to make predictions using
+    #               your learned neural network. You should set p to a 
+    #               vector containing labels between 1 to num_labels.
+    #
+    # Hint: The max function might come in useful. In particular, the np.argmax
+    #       function can return the index of the max element, for more
+    #       information see 'numpy.argmax' on the numpy website. If your examples 
+    #       are in rows, then, you can use np.argmax(probs, axis=1) to obtain the 
+    #       max for each row.
+    #
+
+    # =========================================================================
+        
+    z2 = X.dot(Theta1.T)
+    a2 = sigmoid(z2)
+    a2 = np.column_stack((np.ones((m, 1)), a2)) # bias unit
+
+    z3 = a2.dot(Theta2.T)
+    a3 = sigmoid(z3)
+
+    p = np.argmax(a3, axis=1)
+
+    # =========================================================================
+        
+    return p
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image3.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image4.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\section{| 5 Learning a classifier with a neural Network}
+
+\subsection{| 5.1 Feedforward and cost function}
+
+\begin{lstlisting}
+import numpy as np
+
+from sigmoid import sigmoid
+from sigmoidGradient import sigmoidGradient
+
+
+def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, Lambda):
+
+    """computes the cost and gradient of the neural network. The
+    parameters for the neural network are "unrolled" into the vector
+    nn_params and need to be converted back into the weight matrices.
+
+    The returned parameter grad should be a "unrolled" vector of the
+    partial derivatives of the neural network.
+        """
+
+    # Reshape nn_params back into the parameters theta1 and theta2, the weight matrices
+    # for our 2 layer neural network
+    # Obtain theta1 and theta2 back from nn_params
+
+    theta1 = nn_params[0:(hidden_layer_size*(input_layer_size+1))].reshape((input_layer_size+1),hidden_layer_size).T
+    theta2 = nn_params[(hidden_layer_size*(input_layer_size+1)):].reshape((hidden_layer_size+1),num_labels).T
+
+    # Setup some useful variables
+    m, _ = X.shape
+
+    # You need to return the following variables correctly 
+    J = 0
+    theta1_grad = np.zeros(theta1.shape)
+    theta2_grad = np.zeros(theta2.shape)
+
+    # ====================== YOUR CODE HERE ======================
+    # Instructions: You should complete the code by working through the
+    #               following parts.
+    #
+    # Part 1: Feedforward the neural network and return the cost in the
+    #         variable J. After implementing Part 1, you can verify that your
+    #         cost function computation is correct by verifying the cost
+    #         computed in ex3_nn_train.py
+    #
+    #	NOTE DE GLC: JE VOUS AI MIS LA CORRECTION DES PART 2 ET 3 dans la suite du code
+    #   
+    #
+    # Part 2: Implement the backpropagation algorithm to compute the gradients
+    #         theta1_grad and theta2_grad. You should return the partial derivatives of
+    #         the cost function with respect to theta1 and theta2 in theta1_grad and
+    #         theta2_grad, respectively. After implementing Part 2, you can check
+    #         that your implementation is correct by running checkNNGradients
+    #
+    #         Note: The vector y passed into the function is a vector of labels
+    #               containing values from 1...K. You need to map this vector into a 
+    #               binary vector of 1's and 0's to be used with the neural network
+    #               cost function.
+    #
+    #         Hint: We recommend implementing backpropagation using a for-loop
+    #               over the training examples if you are implementing it for the 
+    #               first time.
+    #
+    # Part 3: Implement regularization with the cost function and gradients.
+    #
+    #         Hint: You can implement this around the code for
+    #               backpropagation. That is, you can compute the gradients for
+    #               the regularization separately and then add them to theta1_grad
+    #               and theta2_grad from Part 2.
+    #
+    # =========================================================================
+
+    
+    # Add ones to the X data matrix
+    a1 = np.column_stack((np.ones((m, 1)), X))
+
+    z2 = a1.dot(theta1.T)
+    a2 = sigmoid(z2)
+    a2 = np.column_stack((np.ones((m, 1)), a2))
+
+    z3 = a2.dot(theta2.T)
+    a3 = sigmoid(z3)
+    
+    # Construct a 10xm "y" matrix with all zeros and only one "1" entry
+    y_matrix = np.zeros((num_labels,m)) # A complter
+
+    for i in range(m):
+        y_matrix[y[i], i] = 1
+
+    # Compute Cost
+    J = (-1/m) * np.sum(y_matrix.T * np.log(a3) + (1 - y_matrix.T) * np.log(1 - a3))
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image5.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\subsection{| 5.2 Regularized cost function}
+
+\begin{lstlisting}
+    # =========================================================================
+    # PART 2:  Cost regularisation (skip it the first time)
+
+    # Cost regularisation
+    reg = (Lambda / (2 * m)) * (np.sum(theta1[:, 1:] ** 2) 
+                                + np.sum(theta2[:, 1:] ** 2))
+    J = J + reg
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image6.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsection{| 5.3 Backpropagation}
+\subsubsection{| 5.3.1 Sigmoid gradient}
+
+\begin{lstlisting}
+from sigmoid import sigmoid
+
+def sigmoidGradient(z):
+    """computes the gradient of the sigmoid function
+    evaluated at z. This should work regardless if z is a matrix or a
+    vector. In particular, if z is a vector or matrix, you should return
+    the gradient for each element."""
+
+    # ====================== YOUR CODE HERE ======================
+    # Instructions: Compute the gradient of the sigmoid function evaluated at
+    #               each value of z (z can be a matrix, vector or scalar).
+
+    s = sigmoid(z)
+    g = s * (1 - s)
+
+    # =============================================================
+
+    return g
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image7.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsubsection{| 5.3.2 Random initialization}
+
+\begin{lstlisting}
+import numpy as np
+
+def randInitializeWeights(L_in, L_out):
+    """randomly iniializes the weights of a layer with L_in incoming connections and L_out outgoing
+    connections.
+    Note that W should be set to a matrix of size(L_out, 1 + L_in) as the 1st column of W handles the "bias" terms"""
+
+    # ====================== YOUR CODE HERE ===================================
+    # Instructions: Initialize W randomly so that we break the symmetry while
+    #               training the neural network.
+    #
+    # Note: The first row of W corresponds to the parameters for the bias units
+    #
+
+    epsilon_init = 0.12
+    W = np.random.rand(L_out, 1 + L_in) * 2 * epsilon_init - epsilon_init
+
+    # =========================================================================
+
+    return W
+\end{lstlisting}
+
+
+\subsubsection{| 5.3.3 The backpropagation algorithmn}
+\subsubsection{| 5.3.4 Gradient checking}
+\subsubsection{| 5.3.5 Regularized Neural Networks}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image9.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image10.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image11.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image12.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+
+\subsubsection{| 5.3.6 Sigmoid function}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image13.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\subsection{| 5.4 Visualising the hidden layer}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image8.png}
+    \label{fig:placeholder}
+\end{figure} 
+
+The neurons in the hidden layer learn intermediate representations of the data, such as features and patterns present in the images, and the output layer combines these representations to classify the digits.
+
+\subsection{| 5.5 Final analysis}
+
+\noindent\textbf{A: $\lambda = 0$ and maxiter = 50}
+
+With $\lambda = 0$ and only 50 iterations, there is no regularization and the optimization stops relatively early. The training accuracy is about 95.88\%. The network has not yet fully fitted the training data.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image14.png}
+    \label{fig:placeholder}
+\end{figure} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image15.png}
+    \label{fig:placeholder}
+\end{figure} 
+
+\newpage
+\noindent\textbf{B: $\lambda = 0$ and maxiter = 400}
+
+With $\lambda = 0$ and 400 iterations, the network reaches 100\% training accuracy. Since there is no regularization and the number of iterations is high, the network can fit the training set extremely closely. This corresponds to a high risk of overfitting.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image16.png}
+    \label{fig:placeholder}
+\end{figure} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image27.png}
+    \label{fig:placeholder}
+\end{figure} 
+
+\newpage
+\noindent\textbf{C: $\lambda = 0.1$ and maxiter = 400}
+
+With $\lambda = 0.1$ and 400 iterations, the network also reaches 100\% training accuracy. The weak regularization still allows a very complex model, therefore the risk of overfitting remains high.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image17.png}
+    \label{fig:placeholder}
+\end{figure} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image18.png}
+    \label{fig:placeholder}
+\end{figure} 
+
+\newpage
+\noindent\textbf{D: $\lambda = 1$ and maxiter = 50}
+
+With $\lambda = 1$ and 50 iterations, the regularization limits the model complexity and the short training time gives an accuracy of about 96.78\%. The model is less fitted to the training set than in the cases with 400 iterations.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image19.png}
+    \label{fig:placeholder}
+\end{figure} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image20.png}
+    \label{fig:placeholder}
+\end{figure} 
+
+\newpage
+\noindent\textbf{E: $\lambda = 1$ and maxiter = 400}
+
+With $\lambda = 1$ and 400 iterations, the neural network reaches about 99.38\% training accuracy. This shows that a moderate regularization still allows the model to fit the training data very well.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image21.png}
+    \label{fig:placeholder}
+\end{figure} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image22.png}
+    \label{fig:placeholder}
+\end{figure} 
+
+\newpage
+\noindent\textbf{F: $\lambda = 10$ and maxiter = 400}
+
+With $\lambda = 10$ and 400 iterations, the regularization becomes much stronger. The training accuracy decreases to about 94.26\%, showing that the model is more constrained and less able to fit the training data.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image23.png}
+    \label{fig:placeholder}
+\end{figure} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image24.png}
+    \label{fig:placeholder}
+\end{figure} 
+
+\newpage
+\noindent\textbf{G: $\lambda = 100$ and maxiter = 400}
+
+With $\lambda = 100$ and 400 iterations, the regularization is very strong and the training accuracy drops to about 84.74\%. In this case, the model is too constrained and this is an example of underfitting.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image25.png}
+    \label{fig:placeholder}
+\end{figure} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/image26.png}
+    \label{fig:placeholder}
+\end{figure} 
+
+
+Small values of $\lambda$ give better training accuracy but increase the risk of overfitting. Large values of $\lambda$ can cause underfitting.
+
+Increasing \texttt{maxiter} generally improves the fit to the training data.
+
+\newpage
+\subsection{| 6 Some questions, you have to answer...}
+
+· Décrivez l’approche basée sur les réseaux de neurones. Quelle modélisation est retenue? Quels sont
+les paramètres à apprendre?
+\vspace{\baselineskip}
+
+R: L’approche consiste à utiliser un réseau de neurones pour classer les chiffres manuscrits. 
+Le modèle utilisé contient une couche d’entrée de 400 pixels, une couche cachée de 25 neurones et une couche de sortie de 10 neurones. 
+Les paramètres à apprendre sont les poids des connexions entre les couches, représentés par les matrices theta(1) et theta(2).
+\vspace{\baselineskip}
+
+· Quelle est la fonction de coût? Quelles modifications sont effectuées par rapport à celle utilisée en
+TP2?
+\vspace{\baselineskip}
+
+R: La fonction de coût est basée sur la même idée que la régression logistique du TP2, 
+avec une somme des erreurs de classification. La différence est qu’ici on calcule le coût pour les 10 neurones de sortie de la réseau neuronal.
+ On ajoute aussi un terme de régularisation sur les poids, sauf sur les termes de biais.

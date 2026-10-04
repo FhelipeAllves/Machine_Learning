@@ -7,24 +7,24 @@ from sigmoidGradient import sigmoidGradient
 def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, Lambda):
 
     """computes the cost and gradient of the neural network. The
-  parameters for the neural network are "unrolled" into the vector
-  nn_params and need to be converted back into the weight matrices.
+    parameters for the neural network are "unrolled" into the vector
+    nn_params and need to be converted back into the weight matrices.
 
-  The returned parameter grad should be a "unrolled" vector of the
-  partial derivatives of the neural network.
-    """
+    The returned parameter grad should be a "unrolled" vector of the
+    partial derivatives of the neural network.
+        """
 
-# Reshape nn_params back into the parameters theta1 and theta2, the weight matrices
-# for our 2 layer neural network
-# Obtain theta1 and theta2 back from nn_params
+    # Reshape nn_params back into the parameters theta1 and theta2, the weight matrices
+    # for our 2 layer neural network
+    # Obtain theta1 and theta2 back from nn_params
 
     theta1 = nn_params[0:(hidden_layer_size*(input_layer_size+1))].reshape((input_layer_size+1),hidden_layer_size).T
     theta2 = nn_params[(hidden_layer_size*(input_layer_size+1)):].reshape((hidden_layer_size+1),num_labels).T
 
-# Setup some useful variables
+    # Setup some useful variables
     m, _ = X.shape
 
-# You need to return the following variables correctly 
+    # You need to return the following variables correctly 
     J = 0
     theta1_grad = np.zeros(theta1.shape)
     theta2_grad = np.zeros(theta2.shape)
@@ -67,32 +67,31 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
 
     
     # Add ones to the X data matrix
+    a1 = np.column_stack((np.ones((m, 1)), X))
 
-    
-    
+    z2 = a1.dot(theta1.T)
+    a2 = sigmoid(z2)
+    a2 = np.column_stack((np.ones((m, 1)), a2))
+
+    z3 = a2.dot(theta2.T)
+    a3 = sigmoid(z3)
     
     # Construct a 10xm "y" matrix with all zeros and only one "1" entry
     y_matrix = np.zeros((num_labels,m)) # A compléter
-    
-    
-    
-    
-    
+
+    for i in range(m):
+        y_matrix[y[i], i] = 1
+
     # Compute Cost
-    
-    
-    
-    
-    
+    J = (-1/m) * np.sum(y_matrix.T * np.log(a3) + (1 - y_matrix.T) * np.log(1 - a3))
+
     # =========================================================================
     # PART 2:  Cost regularisation (skip it the first time)
 
-    
-    
     # Cost regularisation
-    reg = 0.
+    reg = (Lambda / (2 * m)) * (np.sum(theta1[:, 1:] ** 2) 
+                                + np.sum(theta2[:, 1:] ** 2))
     J = J + reg
-
 
     # =========================================================================
     # PART 3:  compute gradients (skip it the first time)
@@ -111,10 +110,6 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
     theta2_grad = delta2/m  
     reg = (theta2[:,1:]*Lambda)/m
     theta2_grad[:,1:] = theta2_grad[:,1:] + reg
-
-    
-    
-        
 
     # Unroll gradient
     grad = np.hstack((theta1_grad.T.ravel(), theta2_grad.T.ravel()))
