@@ -25,7 +25,19 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
     m, _ = X.shape
 
 # You need to return the following variables correctly 
-    J = 0
+    X = np.column_stack((np.ones((m, 1)), X))
+    z2 = X.dot(theta1.T)
+    a2 = sigmoid(z2)
+    a2 = np.column_stack((np.ones((m, 1)), a2))
+    z3 = a2 @ theta2.T
+    a3 = sigmoid(z3) 
+    # h = np.argmax(a3, axis=1)
+    y_train = np.zeros((m, num_labels))
+    y_train[np.arange(m), y.flatten()] = 1
+
+    J = 1/m * np.sum(-y_train*np.log(a3) - (1-y_train)*np.log(1-a3))
+    
+    
     theta1_grad = np.zeros(theta1.shape)
     theta2_grad = np.zeros(theta2.shape)
 
@@ -90,17 +102,17 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
     
     
     # Cost regularisation
-    reg = 0.
+    reg = Lambda/(2*m) * (np.sum(theta1[:,1:]**2) + np.sum(theta2[:,1:]**2))
     J = J + reg
 
 
     # =========================================================================
     # PART 3:  compute gradients (skip it the first time)
     # Gradients
-    d3 = a3 - y_matrix.T # 5000x10
+    d3 = a3 - y_train   # 5000x10
     d2 = theta2[:,1:].T.dot(d3.T)*sigmoidGradient(z2.T) # 25x10 *10x5000 * 25x5000 = 25x5000
     
-    delta1 = d2.dot(a1) # 25x5000 * 5000x401 = 25x401
+    delta1 = d2.dot(X) # 25x5000 * 5000x401 = 25x401
     delta2 = d3.T.dot(a2) # 10x5000 *5000x26 = 10x26
     
     # Gradient regularisation

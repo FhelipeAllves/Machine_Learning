@@ -26,9 +26,16 @@ def predictNeuralNetwork(Theta1, Theta2, X):
 # =========================================================================
     
 
+    a1 = X
 
+    z2 = a1 @ Theta1.T
+    a2 = sigmoid(z2)
+    a2 =  np.column_stack((np.ones((m,1)), a2))
 
+    z3 = a2 @ Theta2.T
+    a3 = sigmoid(z3)
 
+    p = np.argmax(a3, axis=1)
 
 # =========================================================================
     
