@@ -1,0 +1,171 @@
+\section{ Regularized Linear Regression}
+
+\subsection{Visualizing the dataset}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figure/datas.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsection{Regularized linear regression cost function}
+
+
+\begin{lstlisting}
+import numpy as np
+def linearRegCostFunction(X, y, theta, Lambda):
+    """computes the cost of using theta as the parameter for linear regression
+    to fit the data points in X and y.
+    Returns the cost in J
+    """
+
+    # Initialize some useful values
+
+    m,n = X.shape # number of training examples
+    theta = theta.reshape((n,1)) # in case where theta is a vector (n,) 
+    J = 0.
+
+
+    h = X.dot(theta) 
+    a = (1/(2*m)) * np.sum(np.square(h - y))
+    b = (Lambda/(2*m)) * np.sum(np.square(theta[1:]))
+    J = a+b
+
+    return J.flatten()
+
+\end{lstlisting}
+
+\begin{itemize}
+    \item Output :
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\linewidth]{figure/outJ.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsection{Regularized linear regression gradient}
+
+\begin{lstlisting}
+import numpy as np
+
+
+def linearRegGradientFunction(X, y, theta, Lambda):
+    """computes the gardients of the cost using theta as the parameter for linear regression
+        to fit the data points in X and y.
+        Returns the gradient in grad
+     """
+
+    # Initialize some values
+    m,n = X.shape # number of training examples
+    theta = theta.reshape((n,1)) # in case where theta is a vector (n,)
+    grad = 0.
+
+    h = X.dot(theta)
+    grad = (1/m) * X.T.dot(h - y) + (Lambda/m) * np.r_[[[0]], theta[1:]]
+
+    return grad.flatten()
+
+
+\end{lstlisting}
+
+\begin{itemize}
+    \item Output :
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\linewidth]{figure/out2.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsection{Fitting linear regression}
+
+
+\begin{lstlisting}
+... code-block:: python
+
+    # ====================== YOUR CODE HERE ======================
+    # Instructions: Compute
+    #   - theta the final thetas
+    #   - the training cost vs iteration number from thetas
+    #   - the validation cost vs iteration number from thetas
+
+    # outputs
+    theta = result.x
+    cost_train = [linearRegCostFunction(X, y, t, 0) for t in thetas]
+
+    if Xval is not None and yval is not None:
+        cost_val = [linearRegCostFunction(Xval, yval, t, 0) for t in thetas]
+
+    # ========================================
+
+    # force to np array
+    cost_train = np.array(cost_train)
+    cost_val = np.array(cost_val)
+
+    return theta, cost_train, cost_val
+
+
+\end{lstlisting}
+
+\begin{itemize}
+    \item Output :
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\linewidth]{figure/fit.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+
+\section{Bias-variance}
+
+\subsection{Learning curves}
+
+\begin{lstlisting}
+... code-block:: python
+
+def learningCurve(X, y, Lambda, Xval, yval, ax=plt.gca(), maxiter=2000):
+    """returns the train and validation/test set costs for a learning curve. In particular,
+    it returns two vectors of the same length - cost_train and
+    cost_val.
+
+    In this function, you will compute the train and validation costs.
+    """
+
+    # Number of training examples
+    m, _ = X.shape
+    cost_train = 0.
+    cost_val = 0.
+
+    _, cost_train, cost_val =trainLinearReg(X, y, Lambda, Xval, yval, maxiter=maxiter)
+
+    # display
+    plt.figure()
+    ax.plot(range(cost_train.size), cost_train, color='b', lw=2, label='Train')
+    ax.plot(range(cost_val.size), cost_val, color='r', lw=2, label='Validation')
+    ax.set_title('Learning curves for linear regression')
+    ax.grid()
+    ax.set_xlabel('Number of iterations')
+    ax.set_ylabel('Cost')
+    ax.legend(loc='upper right', shadow=True, fontsize='x-large', numpoints=1)
+
+    return cost_train, cost_val 
+\end{lstlisting}
+
+\begin{itemize}
+    \item Output :
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\linewidth]{figure/learCurves.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\section{Polynomial regression}
