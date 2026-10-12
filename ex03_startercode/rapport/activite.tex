@@ -415,15 +415,16 @@ Increasing \texttt{maxiter} generally improves the fit to the training data.
 les paramètres à apprendre?
 \vspace{\baselineskip}
 
-R: L’approche consiste à utiliser un réseau de neurones pour classer les chiffres manuscrits. 
-Le modèle utilisé contient une couche d’entrée de 400 pixels, une couche cachée de 25 neurones et une couche de sortie de 10 neurones. 
-Les paramètres à apprendre sont les poids des connexions entre les couches, représentés par les matrices theta(1) et theta(2).
+R: On utilise un réseau de neurones pour reconnaître les chiffres manuscrits.
+Le réseau contient 400 entrées, une couche cachée de 25 neurones et une couche de sortie de 10 neurones.
+Les paramètres à apprendre sont les poids entre les différentes couches, représentés par $\Theta^{(1)}$ et $\Theta^{(2)}$.
+
 \vspace{\baselineskip}
 
 · Quelle est la fonction de coût? Quelles modifications sont effectuées par rapport à celle utilisée en
 TP2?
 \vspace{\baselineskip}
 
-R: La fonction de coût est basée sur la même idée que la régression logistique du TP2, 
-avec une somme des erreurs de classification. La différence est qu’ici on calcule le coût pour les 10 neurones de sortie de la réseau neuronal.
- On ajoute aussi un terme de régularisation sur les poids, sauf sur les termes de biais.
+R: La fonction de coût est basée sur la même idée que celle de la régression logistique du TP2.
+La différence est que le coût est maintenant calculé pour les 10 sorties du réseau.
+On ajoute aussi une régularisation sur les poids, sauf pour les termes de biais.
