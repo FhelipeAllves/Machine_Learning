@@ -43,7 +43,7 @@ def predictNeuralNetwork(Theta1, Theta2, X):
     #       max for each row.
     #
 
-    # =========================================================================
+    # ============================================
         
     z2 = X.dot(Theta1.T)
     a2 = sigmoid(z2)
@@ -54,7 +54,7 @@ def predictNeuralNetwork(Theta1, Theta2, X):
 
     p = np.argmax(a3, axis=1)
 
-    # =========================================================================
+    # ==================================================
         
     return p
 \end{lstlisting}
@@ -142,7 +142,7 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
     #               the regularization separately and then add them to theta1_grad
     #               and theta2_grad from Part 2.
     #
-    # =========================================================================
+    # ====================================================
 
     
     # Add ones to the X data matrix
@@ -175,7 +175,7 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
 \subsection{| 5.2 Regularized cost function}
 
 \begin{lstlisting}
-    # =========================================================================
+    # ============================================
     # PART 2:  Cost regularisation (skip it the first time)
 
     # Cost regularisation
@@ -209,7 +209,7 @@ def sigmoidGradient(z):
     s = sigmoid(z)
     g = s * (1 - s)
 
-    # =============================================================
+    # ======================================
 
     return g
 \end{lstlisting}
@@ -240,7 +240,7 @@ def randInitializeWeights(L_in, L_out):
     epsilon_init = 0.12
     W = np.random.rand(L_out, 1 + L_in) * 2 * epsilon_init - epsilon_init
 
-    # =========================================================================
+    # ===================================================
 
     return W
 \end{lstlisting}

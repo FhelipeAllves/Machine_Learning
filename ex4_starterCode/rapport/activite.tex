@@ -47,7 +47,7 @@ def linearRegCostFunction(X, y, theta, Lambda):
     J_reg = (Lambda / (2*m)) * np.sum(theta[1:]**2)
     J = J_error + J_reg
 
-    # =========================================================================
+    # ==================================================
     return J.flatten()
 \end{lstlisting}
 
@@ -87,7 +87,7 @@ def linearRegGradientFunction(X, y, theta, Lambda):
     grad = (X.T @ e) / m
     grad[1:] += (Lambda / m) * theta[1:]
 
-    # =========================================================================
+    # ==================================================
     return grad.flatten()
 \end{lstlisting}
 
@@ -163,7 +163,7 @@ def trainLinearReg(X, y, Lambda, Xval=None, yval=None, maxiter=200):
         for t in thetas:
             cost_val.append(linearRegCostFunction(Xval, yval, t, 0)[0])
 
-    # =========================================================================
+    # ==================================================
 
     # force to np array
     cost_train = np.array(cost_train)
@@ -218,7 +218,7 @@ def learningCurve(X, y, Lambda, Xval, yval, ax=plt.gca(), maxiter=2000):
     # Erreur d'apprentissage et de generalisation
     _, cost_train, cost_val = trainLinearReg(X, y, Lambda, Xval, yval, maxiter)
 
-    # =========================================================================
+    # ==============================================
 
     # display
     plt.figure()
@@ -269,16 +269,8 @@ def polyFeatures(X, p):
     for i in range(p):
         X_poly[:, i] = X[:, 0] ** (i + 1)
     
-    # =========================================================================
+    # =============================================
     return X_poly
-
-\end{lstlisting}
-
-\begin{lstlisting}
-
-\end{lstlisting}
-
-\begin{lstlisting}
 
 \end{lstlisting}
 
@@ -296,7 +288,7 @@ The polynomial model fits the training data well, but the curve changes too much
 
 The training cost is very low, while the validation cost remains high.
 
-This indicates **overfitting (high variance)** because the model does not perform well on new data.
+This indicates overfitting (high variance) because the model does not perform well on new data.
 
 \subsection{| 5.2 Adjusting the regularization hyper-parameter}
 
