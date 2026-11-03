@@ -22,7 +22,7 @@ def preprocessing():
     plt.imshow(img87)
     plt.title("Aral Sea - 1987")
 
-    plt.show()
+    # plt.show()
 
     margin = 50 
     img73 = img73[margin+10:-margin, :, :]
@@ -43,8 +43,8 @@ def preprocessing():
 
     print("Nombre de données d'apprentissage : ", nbPix)
 
-    ax2D = displayFeatures2d(featLearn)
-    ax3D = displayFeatures3d(featLearn)
+    # ax2D = displayFeatures2d(featLearn)
+    # ax3D = displayFeatures3d(featLearn)
     
     return featLearn,img73,img87
 

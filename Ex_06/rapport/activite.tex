@@ -136,3 +136,164 @@ informations peut-on les relier?)}
     3D affichent qu'on a une certaine dvision de deux groupes de pixels, les pixels avec des valeurs plus basses et les pixels avec valeurs
     plus haut, comme ça est possible de diviser les pixels en deux groupes.
 \end{itemize}
+
+\section*{6 Approche non supervisée par la méthode des k-means}
+
+\subsection*{Question 6.1: Décrire avec vos mots la méthode des centres mobiles.}
+
+\begin{itemize}
+    \item La méthode des centres mobiles fonctionne de façon non supervisé c'est à dire que la méthode apprend à classifier les
+    points en K groupes automatiquement. L'algorithme place les centres initialement au hasard et les points son classés d'accord
+    le centre plus proche. A chaque interaction les centres sont ajustés au milleur géometrique de leurs groupes respectifs. Ce processus
+    est répeté jusqu'à les groupes soient stables et ne bougent plus.
+\end{itemize}
+
+\subsection*{Question 6.2: Appeler et compléter le script
+unsupervisedTraining.py qui permet de réaliser un
+apprentissage non supervisé du modèle de classement (classifieur) à l’aide de la fonction
+KMeans()
+du package scikit-learn (puissant package de Machine Learning pour python). Comment utilise-t-on
+cette fonction ? Quels en sont les paramètres de contrôle importants ?}
+
+
+\begin{lstlisting}
+def unsupervisedTraining(featLearn, method='kmeans'):
+    ...
+    if method == 'kmeans':
+
+        Xs= StandardScaler().fit_transform(featLearn) #normaliserlesdescripteurs
+        #---K-means------------------------------------------------------
+        km= KMeans(n_clusters=nbCluster,init="k-means++",n_init=10, random_state=0).fit(Xs)
+        model = km.fit(Xs)
+        labels_km =km.labels_ #affectationdure
+        J = km.inertia_ #fonctiondecoutJ
+        s = silhouette_score(Xs,labels_km) #qualiteinterne
+    
+\end{lstlisting}
+
+
+En regardant la documentation du package les paramètres de contrôle importants à configurer lors de l'instanciation sont :
+\begin{itemize}
+    \item \textbf{\texttt{n\_clusters}} : Définit le nombre de classes ($K$) à identifier dans les données.
+    \item \textbf{\texttt{init}} : Détermine la méthode de placement initial des centres, comme \texttt{k-means++} qui les répartit de manière optimale pour accélérer la convergence et éviter les minima locaux.
+    \item \textbf{\texttt{n\_init}} : Fixe le nombre d'exécutions complètes de l'algorithme avec des points de départ différents, afin de conserver automatiquement le modèle minimisant la fonction de coût (l'inertie).
+    \item \textbf{\texttt{max\_iter}} : Limite le nombre maximal de déplacements des centres lors d'une exécution pour éviter une boucle infinie si le modèle peine à converger.
+    \item \textbf{\texttt{random\_state}} : Fixe la graine du générateur de nombres aléatoires pour assurer la stricte reproductibilité des résultats à chaque lancement du script.
+\end{itemize}
+
+\subsection*{Question 6.3: Compléter aralsea\_main.py pour prédire les labels sur la base d’apprentissage grâce au modèle appris.}
+\begin{lstlisting}
+    ...
+
+    # Apprentissage de la fonction de classement
+
+    # ------------------------------------------------
+    # YOUR CODE HERE
+
+    model = unsupervisedTraining(featLearn, method='kmeans')
+
+    # ------------------------------------------------
+    # ------------------------------------------------
+
+
+
+
+    # prediction des labels sur la base d'apprentissage
+
+    # ------------------------------------------------
+    # YOUR CODE HERE
+
+    labelsLearn = model.predict(featLearn)
+
+    # ------------------------------------------------
+    # ------------------------------------------------
+\end{lstlisting}
+
+\subsection*{Question 6.4: Il est maintenant possible de visualiser les valeurs des descripteurs d’apprentissage et leur appartenance à l’une des classes (un des  clusters ). Nous utiliserons la fonction : displayFeatures2d et displayFeatures3d . Compléter aralsea\_main.py . Faire varier le paramétrage de la fonction KMeans et analyser les différences et la qualité de l’apprentissage.}
+
+C'était possible de varié les paramètres de la fonction pour identifier les meilleurs paramètres pour la méthode, en-dessous 
+on voit la sortie pour chaque paramètre testé :
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\linewidth]{figure/k2.png} \hfill
+    \includegraphics[width=0.48\linewidth]{figure/k2_.png}
+    \caption{résultats pour k = 2.}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\linewidth]{figure/k3.png} \hfill
+    \includegraphics[width=0.48\linewidth]{figure/k3_.png}
+    \caption{résultats pour k = 3.}
+    \label{kmeans}
+\end{figure}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\linewidth]{figure/k4.png} \hfill
+    \includegraphics[width=0.48\linewidth]{figure/k4_.png}
+    \caption{résultats pour k = 4.}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\linewidth]{figure/random.png} \hfill
+    \includegraphics[width=0.48\linewidth]{figure/random_.png}
+    \caption{résultats en remplaçant la méthode k-means++ par random.}
+\end{figure}
+
+On peut rémarquer que le résultat avec k = 3 et la méthode k-means++ est le plus performant (figure \ref{kmeans}). 
+Dans ce cas c'est possible d'isoler les marges blanches de l'image dans un groupe, en plus identifier l'eau, avec les pixels
+des valeurs plus basse, et la terre. 
+
+\subsection*{Question 6.5: A ce stade, vous avez choisi les hyper-paramètres de vos méthodes de machine learning et obtenu le modèle de classement, nous pouvons alors utiliser les données d’apprentissage pour classifier l’ensemble des deux images. Il faut calculer les descripteurs sur toute l’image (mise sous la forme d’une matrice) puis utiliser le modèle de classement issu de l’apprentissage du k-means). Compléter les scripts aralsea\_main.py et unsupervisedClassifying.py .}
+
+\begin{lstlisting}
+    ...
+#%% Classement et estimation de la diminution de surface
+# Classifying / Predicting / Testing
+
+# mise en forme de l'image de 1973 et 1987 en matrice Num Pixels / Val Pixels
+
+# ------------------------------------------------
+# YOUR CODE HERE
+
+h73, w73, c73 = img73.shape 
+h87, w87, c87 = img87.shape
+
+feat73 = img73.reshape(h73*w73, c73)
+feat87 = img87.reshape(h87*w87, c87)
+
+# ------------------------------------------------
+# ------------------------------------------------
+
+
+# Classement des deux jeux de donnees et visualisation des resultats en image
+
+# ------------------------------------------------
+# YOUR CODE HERE
+
+labels73 = unsupervisedClassifying(model, feat73)
+labels87 = unsupervisedClassifying(model, feat87)
+\end{lstlisting}
+
+\begin{lstlisting}
+    #%% package
+import numpy as np
+from sklearn.cluster import KMeans
+
+
+#%% def unsupervisedClassifying
+def unsupervisedClassifying(model, feat):
+
+    label = model.predict(feat)
+
+    return label
+\end{lstlisting}
+
+\subsection*{Question 6.6: Pour visualiser le résultat de classification, il faut que chaque classe prédite puisse être affectée au pixel correspondant de l’image. Cette image est calculée et visualisée par la fonction displayImageLabel.py . Compléter aralsea\_main.py}
